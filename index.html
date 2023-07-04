@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="st.css">
+</head>
+<body>
+    <div id="scramble-game">
+        <h1>Word Scramble</h1>
+        <p>Unscramble the letters to form a word:</p>
+        <p id="scrambled-word"></p>
+        <input type="text" id="user-input">
+        <button id="submit-button">Submit</button>
+        <p id="message"></p>
+      </div>
+      <script>
+        const scrambleGame = document.getElementById("scramble-game");
+const scrambledWordEl = document.getElementById("scrambled-word");
+const userInputEl = document.getElementById("user-input");
+const submitButtonEl = document.getElementById("submit-button");
+const messageEl = document.getElementById("message");
+
+const words = [
+  "javascript",
+  "html",
+  "css",
+  "programming",
+  "developer"
+];
+
+let scrambledWord = "";
+
+submitButtonEl.addEventListener("click", function() {
+  if (scrambledWord === userInputEl.value) {
+    messageEl.textContent = "Correct!";
+    generateScrambledWord();
+  } else {
+    messageEl.textContent = "Try Again";
+  }
+});
+
+function generateScrambledWord() {
+  let randomIndex = Math.floor(Math.random() * words.length);
+  let word = words[randomIndex];
+  scrambledWord = scramble(word);
+  scrambledWordEl.textContent = scrambledWord;
+  userInputEl.value = "";
+}
+
+function scramble(word) {
+  let scrambledWord = "";
+  word = word.split("");
+  while (word.length > 0) {
+    let randomIndex = Math.floor(Math.random() * word.length);
+    scrambledWord += word[randomIndex];
+    word.splice(randomIndex, 1);
+  }
+  return scrambledWord;
+}
+
+generateScrambledWord();
+
+      </script>
+</body>
+</html>
+  
